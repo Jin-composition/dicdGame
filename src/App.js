@@ -24,31 +24,43 @@ function App() {
     setOtherHistory([]);
   };
 
+  let myClassName = "Board App-board";
+  let otherClassName = "Board App-board";
+  if (myHistory[myHistory.length - 1] > otherHistory[otherHistory.length - 1]) {
+    myClassName += " Board-winner";
+  } else if (
+    myHistory[myHistory.length - 1] < otherHistory[otherHistory.length - 1]
+  ) {
+    otherClassName += " Board-winner";
+  }
+
   return (
     <div className="App">
       <div>
         <img className="App-logo" src={logo} alt="주사위게임 로고" />
         <h1 className="App-title">주사위게임</h1>
         <div>
-          <Button
-            className="Button blue App-button"
-            color="blue"
-            onClick={handleRollClick}
-          >
+          <Button className="App-button" color="blue" onClick={handleRollClick}>
             던지기
           </Button>
-          <Button
-            className="utton red App-button"
-            color="red"
-            onClick={handleClearClick}
-          >
+          <Button className="App-button" color="red" onClick={handleClearClick}>
             처음부터
           </Button>
         </div>
       </div>
       <div className="App-boards">
-        <Board name="나" color="blue" gameHistory={myHistory} />
-        <Board name="상대" color="red" gameHistory={otherHistory} />
+        <Board
+          name="나"
+          color="blue"
+          gameHistory={myHistory}
+          className={myClassName}
+        />
+        <Board
+          name="상대"
+          color="red"
+          gameHistory={otherHistory}
+          className={otherClassName}
+        />
       </div>
     </div>
   );
